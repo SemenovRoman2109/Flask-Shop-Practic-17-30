@@ -1,0 +1,30 @@
+{%extends "base.html"%}
+
+{%block title%}
+Catalog
+{%endblock%}
+
+{%block content %}
+    {% if admin %}
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="`Назва">
+            <input type="number" name="price" placeholder="Ціна">
+            <input type="number" name="count" placeholder="Кіл. Товарів">
+            <input type="number" name="discount" placeholder="Знижка">
+            <textarea name="description" placeholder="Опис"></textarea>
+            <input type="file" name="image" accept= "image/*" >
+            <button type="submit">Відправити</button>
+        </form>
+    {% endif %}
+
+    {% for product in products%}
+        <h1>{{product.name}} - {{product.price}}$</h1>
+        <p>{{product.description}}</p>
+        <img src="{{ url_for('shop_app.static', filename = product.get_path() ) }}" alt="">
+        <button>Купити</button>
+    {% endfor%}
+{%endblock%}
+
+{%block links %}
+
+{%endblock%}
